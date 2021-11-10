@@ -1,0 +1,66 @@
+{% extends 'sample/base.html' %}
+
+
+{% block contenido %}
+<section class="hero is-warning is-small">
+    <div class="hero-body">
+      <p class="title">
+        Nuevo Estudiante
+      </p>
+      <p class="subtitle">
+       
+      </p>
+    </div>
+</section>
+ <div class="container">
+    <div class="columns">
+        <div class="column">
+            <form method="POST"  class="from-inline" id="form-sucursal" >
+                {% csrf_token %}
+                <div class="columns">
+                    <div class="column is-two-fifths">
+                        <div class="field">
+                            <label class="label">D.N.I</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ingrese D.N.I." 
+                                    id="id_dni" name="dni" maxlength="8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-two-fifths">
+                        <div class="field">
+                            <label class="label">Nombres</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ingrese Nombres." 
+                                    id="id_nombres" name="nombres">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-two-fifths">
+                        <div class="field">
+                            <label class="label">Apellidos</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Ingrese Apellidos" 
+                                    id="id_apellidos" name="apellidos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="colums">
+                    <div class="column is-two-fifths">
+                        <a href="{% url 'estudiante:estudiante-inicio' %}" class="button is-danger">
+                        Cancelar
+                        </a>
+                        <button class="button is-success" type="submit">Guardar</button>
+                    </div>
+                </div>
+            </form>
+            {% comment %} {{ form.as_p }} {% endcomment %}
+        </div>
+    </div>
+  </div>
+{% endblock contenido %}

@@ -1,0 +1,77 @@
+{% extends 'sample/base.html' %}
+
+
+{% block contenido %}
+<section class="hero is-warning is-small">
+    <div class="hero-body">
+      <p class="title">
+        Estudiante
+      </p>
+      <p class="subtitle">
+        Listado de Estudiantes
+      </p>
+    </div>
+</section>
+ <div class="container">
+    <div class="columns">
+      <div class="column">
+        <a href="{% url 'estudiante:estudiante-nuevo' %}" class="button is-link">
+          Nuevo Estudiante
+        </a>
+        <table class="table is-fullwidth is-bordered">
+          <thead class="">
+            <tr>
+              <th>DNI</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if not estudiantes %}
+                <tr>
+                    <td colspan="4" class="has-text-danger has-text-centered">
+                        --Datos No Registrados--
+                    </td>
+                </tr>
+            {% else %}
+                {% for item in estudiantes %}
+                <tr>
+                    <td>{{ item.dni }}</td>
+                    <td>{{ item.nombres }}</td>
+                    <td>{{ item.apellidos }}</td>
+                    <td>
+                        <a href="{% url 'estudiante:estudiante-editar' item.id %}" class="button is-warning is-small">
+                            Editar
+                        </a>
+                        <a href="{% url 'estudiante:estudiante-eliminar' item.id %}" class="button is-danger is-small">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+
+          </tbody>
+        </table>
+        <div class="pagination is-rounded" role="navigation" aria-label="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1"class="pagination-link">&laquo; Primero</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pagination-previous">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    P&aacute;gina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagination-next">Siguiente</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">&Uacute;ltimo &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock contenido %}

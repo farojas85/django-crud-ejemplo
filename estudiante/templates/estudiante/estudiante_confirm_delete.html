@@ -1,0 +1,29 @@
+{% extends 'sample/base.html' %}
+
+
+{% block contenido %}
+<section class="hero is-warning is-small">
+    <div class="hero-body">
+      <p class="title">
+        Nuevo Estudiante
+      </p>
+      <p class="subtitle">
+       
+      </p>
+    </div>
+</section>
+ <div class="container">
+    <div class="columns">
+        <div class="column">
+            <form method="post">{% csrf_token %}
+                ¿Estás seguro que deseas borrar el Estudiante "{{ estudiante }}"?
+                <br>
+                <a href="{% url 'estudiante:estudiante-inicio' %}" class="button is-danger">
+                    No
+                </a>
+                <input type="submit" value="Si" class="button is-success" />
+            </form>            
+        </div>
+    </div>
+  </div>
+{% endblock contenido %}
